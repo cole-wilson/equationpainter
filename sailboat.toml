@@ -13,7 +13,7 @@ description = "A way for teachers to make equation painter worksheets for their 
 url = "https://github.com/cole-wilson/wsm"
 keywords = ""
 license = "MIT"
-latest_build = "2.0.4"
+latest_build = "2.0.5"
 release-notes = "sdfghjkl;'"
 latest_release = "2.0.4"
 
@@ -56,6 +56,7 @@ eqpaint-gui = "__main__.main"
 # Other:
 [git]
 brew = "cole-wilson/homebrew-taps"
+github = "cole-wilson/equationpainter"
 
 
 # Thank you for using Sailboat!

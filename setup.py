@@ -19,7 +19,7 @@ except:
 
 options = {
 	"name":"equationpainter",
-	"version":"2.0.4",
+	"version":"2.0.5",
 	"scripts":[],
 	"entry_points":{'console_scripts': ['eqpaint=equationpainter.mainfile:main', 'eqpaint-gui=equationpainter.__main__:main']},
 	"author":"Cole Wilson",
