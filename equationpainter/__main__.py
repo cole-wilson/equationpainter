@@ -5,7 +5,8 @@ import os
 from PIL import Image
 bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
 path_to_dat = os.path.abspath(os.path.join(bundle_dir, 'web'))
-
+input(path_to_dat)
+input(getattr(sys, '_MEIPASS'))
 filename = ""
 @eel.expose
 def generate(name, prefill, url, path, width, eqtype, custom, maxans, numq):
