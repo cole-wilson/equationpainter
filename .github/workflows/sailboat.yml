@@ -41,6 +41,8 @@ jobs:
       run: |
         pip install eel
         pip install pyinstaller
+				pip install pillow
+				pip install PIL
         pip install sailboat
         python -m sailboat.__main__ build + ${{ matrix.builds }}
         
