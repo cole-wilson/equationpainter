@@ -1,6 +1,6 @@
 # Created with sailboat, the Python releaser
 
-# v3.1.0-rc.2
+# v3.1.0-rc.3
 
 class Equation_Painter < Formula
   include Language::Python::Virtualenv
@@ -40,6 +40,10 @@ class Equation_Painter < Formula
    resource "gevent" do
       url "https://files.pythonhosted.org/packages/8c/40/913ca6edea1efac2fefd3e51c30c530da12f7d043f7e64cecdde8774571c/gevent-21.1.2-cp27-cp27m-manylinux2010_x86_64.whl"
       sha256 "3694f393ab08372bd337b9bc8eebef3ccab3c1623ef94536762a1eee68821449"
+   end
+   resource "bottle" do
+      url "https://files.pythonhosted.org/packages/ea/80/3d2dca1562ffa1929017c74635b4cb3645a352588de89e90d0bb53af3317/bottle-0.12.19.tar.gz"
+      sha256 "a9d73ffcbc6a1345ca2d7949638db46349f5b2b77dac65d6494d45c23628da2c"
    end
    resource "bottle_websocket" do
       url "https://files.pythonhosted.org/packages/17/8e/a22666b4bb0a6e31de579504077df2b1c2f1438136777c728e6cfabef295/bottle-websocket-0.2.9.tar.gz"

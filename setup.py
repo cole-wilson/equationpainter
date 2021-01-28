@@ -19,7 +19,7 @@ except:
 
 options = {
 	"name":"equationpainter",
-	"version":"3.1.0-rc.2",
+	"version":"3.1.0-rc.3",
 	"scripts":[],
 	"entry_points":{'console_scripts': ['eqpaint=equationpainter.__main__:main']},
 	"author":"Cole Wilson",
@@ -29,7 +29,7 @@ options = {
 	"long_description_content_type":"text/markdown",
 	"url":"https://github.com/cole-wilson/wsm",
 	"packages":setuptools.find_packages(),
-	"install_requires":['requests', 'pillow', 'xlsxwriter', 'Image', 'eel', 'gevent', 'bottle_websocket'],
+	"install_requires":['requests', 'pillow', 'xlsxwriter', 'Image', 'eel', 'gevent', 'bottle', 'bottle_websocket'],
 	"classifiers":["Programming Language :: Python :: 3"],
 	"python_requires":'>=3.6',
 	"package_data":{"": ['web'],},
