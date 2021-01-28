@@ -3,6 +3,8 @@ import equationpainter.mainfile as mainfile
 import sys
 import os
 from PIL import Image
+bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
+path_to_dat = os.path.abspath(os.path.join(bundle_dir, 'web'))
 
 filename = ""
 @eel.expose
@@ -32,7 +34,7 @@ def launch():
 		os.system("open -a Excel {}".format(filename))
 
 def main():
-	eel.init('web')
+	eel.init(path_to_dat)
 	eel.start('main.html', size=(400, 500))
 
 if __name__ == "__main__":
