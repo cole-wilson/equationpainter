@@ -19,9 +19,9 @@ except:
 
 options = {
 	"name":"equationpainter",
-	"version":"2.0.5",
+	"version":"3.1.0",
 	"scripts":[],
-	"entry_points":{'console_scripts': ['eqpaint=equationpainter.mainfile:main', 'eqpaint-gui=equationpainter.__main__:main']},
+	"entry_points":{'console_scripts': ['eqpaint=equationpainter.__main__:main']},
 	"author":"Cole Wilson",
 	"author_email":"cole@colewilson.xyz",
 	"description":"A way for teachers to make equation painter worksheets for their students.",
@@ -29,10 +29,10 @@ options = {
 	"long_description_content_type":"text/markdown",
 	"url":"https://github.com/cole-wilson/wsm",
 	"packages":setuptools.find_packages(),
-	"install_requires":['requests', 'pillow', 'xlsxwriter', 'Image'],
+	"install_requires":['requests', 'pillow', 'xlsxwriter', 'Image', 'eel', 'gevent'],
 	"classifiers":["Programming Language :: Python :: 3"],
 	"python_requires":'>=3.6',
-	"package_data":{"": ['*.py', 'web/*', 'web', 'web/*.html', '*.html'],},
+	"package_data":{"": ['web'],},
 	"license":"MIT",
 	"keywords":'',
 }

@@ -13,16 +13,16 @@ description = "A way for teachers to make equation painter worksheets for their 
 url = "https://github.com/cole-wilson/wsm"
 keywords = ""
 license = "MIT"
-latest_build = "2.0.5"
-release-notes = "sdfghjkl;'"
-latest_release = "2.0.4"
+latest_build = "3.1.0+c1545fb.3"
+release-notes = "a"
+latest_release = "2.0.5"
 
 
 # Resource Setup:
 [resources]
 icns = "i.icns"
-data_files = [ "*.py", "web/*", "web", "web/*.html", "*.html",]
-modules = [ "requests", "pillow", "xlsxwriter", "Image",]
+data_files = [ "web",]
+modules = [ "requests", "pillow", "xlsxwriter", "Image", "eel", "gevent",]
 file = "main.py"
 no_import = [ "random", "os", "mainfile",]
 
@@ -38,13 +38,13 @@ type = 1
 mac = true
 windows = true
 unix = false
+options = [ "--hidden-import", "bottle_websocket",]
 bundle_id = "xyz.colewilson.equationpainter"
 
 [build.homebrew]
 
 [build.pypi.commands]
-eqpaint = "mainfile.main"
-eqpaint-gui = "__main__.main"
+eqpaint = "__main__.main"
 
 [build.pypi.entry_points]
 

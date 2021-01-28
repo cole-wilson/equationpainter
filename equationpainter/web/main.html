@@ -4,16 +4,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>EquationPainter</title>
+	  <link rel="icon" href="https://lh3.googleusercontent.com/proxy/enqsble9j2nm_gEt0ibNaACnIEHqeM-w_eZoZm3YEnV_FVrI1jLN_XG5leh2zNXPT8Uv35vvNT3iGU3YnOu44lDw_QlCUarWe-_KHG8XNR5nWbuINARCo8ZAbZORm5GaOIo8zFiJ8SLhpw">
     <style>
 			body {
-				font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+				font-family: "Courier New", Courier;
 				background: lightgrey;
 			}
+			input {
+				width: 95%;
+			}
+			#form {
+				font-size: small;
+			}
+			td {
+				table-layout: fixed;
+				/*border: 1px solid #000000;*/
+				width: 90vw;
+			}
+
 		</style>
   </head>
   <body>
-		<h1 align="center">EquationPainter
-         <button align="center" style="display:inline-block;" onclick="eel.launch()">Launch EquationPainter</button></h1>
+		<h1 align="center">EquationPainter</h1>
+		<details><summary>Help/Instructions</summary>
 		Welcome to EquationPainter!
 		<br><br>
 		EquationPainter will help you create "paint-by-equation" spreadsheets for your students. They will love it!
@@ -30,9 +43,95 @@
 		Every question has a color mapped to it, more questions means more colors in the output drawing.
 		<br><br>
 		Email <a href="mailto:support@colewilson.xyz">support@colewilson.xyz</a> for any questions or for help.
+		</details><div id="form">
+		<hr>
 
+			<fieldset>
+				<legend>General</legend>
+				<table>
+					<tr><td>Spreadsheet name:</td><td><input style="width: 130px" id="name" placeholder="sheet">.xlsx</td></tr>
+					<tr><td>Prefill answers?</td><td>
+						<select id="prefill">
+							<option name="true" selected>True</option>
+							<option name="false">False</option>
+						</select>
+					</tr>
+				</table>
+			</fieldset>
+			<fieldset>
+				<legend>Image</legend>
+				<table>
+					<tr><td>Url to image:</td><td><input type="url" id="url"></td></tr>
+					<tr><td style="text-align:center;" colspan="2">OR</td></tr>
+					<tr><td>Path to image:</td><td><input id="path" placeholder="~/Desktop/file.png"></td></tr>
+					<tr><td>Image width in pixels:</td><td><input type="number" min="3" value="70" id="width"></td></tr>
+				</table>
+			</fieldset>
+			<fieldset>
+				<legend>Questions</legend>
+				<table>
+					<tr><td>Type:</td><td>
+						<select id="eqtype">
+							<option value="+-">Addition/Subtraction</option>
+							<option value="+" selected>Addition</option>
+							<option value="-">Subtraction</option>
+							<option value="custom">Custom (see below)</option>
+						</select>
+					</td></tr>
+					<tr><td>Custom questions:</td><td><textarea rows="7" style="resize: none;width: 100%" id="eqfile" disabled></textarea></td></tr>
+					<tr><td>Max answer</td><td><input type="number" min="" value="100" id="maxans"></td></tr>
+					<tr><td># of questions</td><td><input type="number" min="" value="20" id="numq"></td></tr>
+					<tr><td colspan="2">More questions means more colors, see below for preview.</td></tr>
+				</table>
+			</fieldset>
+			<div style="text-align: center"><br>
+<!--				Preview image:<br><br>-->
+<!--				<img src="https://google.com/favicon.ico" style="width: 100px"><br><br>-->
+				<button onclick="gen()">Generate Spreadsheet!</button><br>
+				<span style="color:red;" id="errortext"></span><br>
+				<span style="color:green;" id="goodtext"></span>
+
+			</div>
+		</div>
 		<br><br><br><hr>
 		&copy; 2021 Cole Wilson
         <script src="/eel.js"></script>
+  		<script>
+			document.getElementById('eqtype').onchange = function(){
+				if (this.value == "custom") {
+					document.getElementById('maxans').disabled = true;
+					document.getElementById('numq').disabled = true;
+					document.getElementById('eqfile').disabled = false;
+				}
+				else {
+					document.getElementById('maxans').disabled = false;
+					document.getElementById('numq').disabled = false;
+					document.getElementById('eqfile').disabled = true;
+				}
+			};
+			function gen() {
+				var name = document.getElementById('name').value;
+				var prefill = document.getElementById('prefill').value;
+				var url = document.getElementById('url').value;
+				var path = document.getElementById('path').value;
+				var width = document.getElementById('width').value;
+				var type = document.getElementById('eqtype').value;
+				var custom = document.getElementById('eqfile').value;
+				var maxans = document.getElementById('maxans').value;
+				var numq = document.getElementById('numq').value;
+				if (name == ""){document.getElementById('errortext').innerHTML = 'Please provide name for your spreadsheet.'}
+				else if (url=="" && path==""){document.getElementById('errortext').innerHTML = 'Please provide a path or URL to your image.'}
+				else{
+					document.getElementById('errortext').innerHTML = 'Loading...';
+
+					eel.generate(name,prefill,url,path,width,type,custom,maxans,numq);
+				}
+			}
+
+			eel.expose(done);
+			function done() {
+				document.getElementById('goodtext').innerHTML = 'Your file has been created!<br><button onclick="eel.launch()">Open Spreadsheet</button>';
+			}
+		</script>
   </body>
 </html>

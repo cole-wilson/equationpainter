@@ -1,6 +1,6 @@
 # Created with sailboat, the Python releaser
 
-# v2.0.5
+# v3.1.0+c1545fb.3
 
 class Equation_Painter < Formula
   include Language::Python::Virtualenv
@@ -32,6 +32,14 @@ class Equation_Painter < Formula
    resource "Image" do
       url "https://files.pythonhosted.org/packages/84/be/961693ed384aa91bcc07525c90e3a34bc06c75f131655dfe21310234c933/image-1.5.33.tar.gz"
       sha256 "baa2e09178277daa50f22fd6d1d51ec78f19c12688921cb9ab5808743f097126"
+   end
+   resource "eel" do
+      url "https://files.pythonhosted.org/packages/b3/c2/7dc22cc9ea23f0339316d6d249392d3ce67190430f2b05a316f3471ae15d/Eel-0.14.0.tar.gz"
+      sha256 "b21f88c21e050eb2b5f6296f1eeeaf57ad9a2dfbffdf1bf88b90ef05a6ffcdb9"
+   end
+   resource "gevent" do
+      url "https://files.pythonhosted.org/packages/8c/40/913ca6edea1efac2fefd3e51c30c530da12f7d043f7e64cecdde8774571c/gevent-21.1.2-cp27-cp27m-manylinux2010_x86_64.whl"
+      sha256 "3694f393ab08372bd337b9bc8eebef3ccab3c1623ef94536762a1eee68821449"
    end
 
 
