@@ -35,7 +35,7 @@ def launch():
 
 def main():
 	eel.init(path_to_dat)
-	eel.start('main.html', size=(400, 500))
+	eel.start(path_to_dat + os.sep + 'main.html', size=(400, 500))
 
 if __name__ == "__main__":
 	main()
