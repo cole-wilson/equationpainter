@@ -19,7 +19,7 @@ except:
 
 options = {
 	"name":"equationpainter",
-	"version":"3.1.0-rc.3",
+	"version":"3.1.0-rc.4",
 	"scripts":[],
 	"entry_points":{'console_scripts': ['eqpaint=equationpainter.__main__:main']},
 	"author":"Cole Wilson",
@@ -32,7 +32,7 @@ options = {
 	"install_requires":['requests', 'pillow', 'xlsxwriter', 'Image', 'eel', 'gevent', 'bottle', 'bottle_websocket'],
 	"classifiers":["Programming Language :: Python :: 3"],
 	"python_requires":'>=3.6',
-	"package_data":{"": ['web'],},
+	"package_data":{"": ['web/*'],},
 	"license":"MIT",
 	"keywords":'',
 }
