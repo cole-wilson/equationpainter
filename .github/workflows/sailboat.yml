@@ -43,7 +43,7 @@ jobs:
         pip install pyinstaller
         pip install pillow
         pip install sailboat
-				pip install xlsxwriter
+        pip install xlsxwriter
         python -m sailboat.__main__ build + ${{ matrix.builds }}
         
     - name: Check for prerelease
