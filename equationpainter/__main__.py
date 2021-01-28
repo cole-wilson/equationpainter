@@ -2,6 +2,7 @@ import eel
 import equationpainter.mainfile as mainfile
 import sys
 import os
+from PIL import Image
 
 filename = ""
 @eel.expose
