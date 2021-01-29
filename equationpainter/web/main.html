@@ -80,13 +80,13 @@
 					</td></tr>
 					<tr><td>Custom questions:</td><td><textarea rows="7" style="resize: none;width: 100%" id="eqfile" disabled></textarea></td></tr>
 					<tr><td>Max answer</td><td><input type="number" min="" value="100" id="maxans"></td></tr>
-					<tr><td># of questions</td><td><input type="number" min="" value="20" id="numq"></td></tr>
+					<tr><td># of questions</td><td><input type="number" min="3" value="20" max="255" id="numq"></td></tr>
 					<tr><td colspan="2">More questions means more colors, see below for preview.</td></tr>
 				</table>
 			</fieldset>
 			<div style="text-align: center"><br>
 				Preview image:<br><br>
-				<img id="preview" src="#" style="width: 100px"><br><br>
+				<img id="preview" src="#" style="width: 400px"><br><br>
 				<button onclick="gen()">Generate Spreadsheet!</button><br>
 				<span style="color:red;" id="errortext"></span><br>
 				<span style="color:green;" id="goodtext"></span>
