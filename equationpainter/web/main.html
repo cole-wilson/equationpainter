@@ -149,7 +149,7 @@
 
 			eel.expose(load_preview);
 			function load_preview(){
-				document.getElementById('preview').src = "preview.png";
+				document.getElementById('preview').src = "preview.png?" + new Date().getTime();
 			}
 			eel.expose(done);
 			function done() {
