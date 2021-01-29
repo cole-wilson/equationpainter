@@ -86,7 +86,7 @@
 			</fieldset>
 			<div style="text-align: center"><br>
 				Preview image:<br><br>
-				<img src="https://google.com/favicon.ico" style="width: 100px"><br><br>
+				<img id="preview" src="#" style="width: 100px"><br><br>
 				<button onclick="gen()">Generate Spreadsheet!</button><br>
 				<span style="color:red;" id="errortext"></span><br>
 				<span style="color:green;" id="goodtext"></span>
@@ -99,6 +99,10 @@
   		<script>
 			document.getElementById('url').onchange = prevpre;
 			document.getElementById('path').onchange = prevpre;
+			document.getElementById('numq').onchange = prevpre;
+			document.getElementById('custom').onchange = prevpre;
+			document.getElementById('width').onchange = prevpre;
+			
 
 			document.getElementById('eqtype').onchange = function(){
 				if (this.value == "custom") {

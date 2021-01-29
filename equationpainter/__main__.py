@@ -42,6 +42,9 @@ def prev(name, prefill, url, path, width, eqtype, custom, maxans, numq):
 	new_height = round(img.height / change_in_size)
 	result = img.resize((width, new_height), resample=Image.BILINEAR)
 	questions = numq
+	if custom != "":
+		eqs = custom.split('\n')
+		questions = len(eqs)
 	width, height = result.size
 	result = result.convert('P', palette=Image.ADAPTIVE, colors=questions)
 	result = result.convert('RGB', palette=Image.ADAPTIVE, colors=questions)
