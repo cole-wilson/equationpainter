@@ -10,7 +10,7 @@ from tkinter.filedialog import askopenfilename, asksaveasfile
 @eel.expose
 def getFile():
 	Tk().withdraw()
-	filename = asksaveasfile(initialdir=os.path.expanduser("~" + os.sep + 'Desktop'))
+	filename = askopenfilename(initialdir=os.path.expanduser("~" + os.sep + 'Desktop'))
 	eel.chosefile(filename)
 
 bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
@@ -19,7 +19,7 @@ path_to_dat = os.path.abspath(os.path.join(bundle_dir, 'web'))
 # input(getattr(sys, '_MEIPASS'))
 filename = ""
 @eel.expose
-def generate(name, prefill, url, path, width, eqtype, custom, maxans, numq):
+def generate(name, prefill, url, path, width, eqtype, custom, maxans, numq,dirs,offset,copyright,mergeheight,pixelcol):
 	global filename
 	filename = mainfile.main(
 		name=name,
@@ -30,7 +30,8 @@ def generate(name, prefill, url, path, width, eqtype, custom, maxans, numq):
 		eqtype=eqtype,
 		custom=custom,
 		maxans=int(maxans),
-		numq=int(numq)
+		numq=int(numq),
+		dirs=dirs, offset=int(offset), copyright=copyright, mergeheight=int(mergeheight),pixelcol=int(pixelcol)
 	)
 	print(filename)
 	eel.done()

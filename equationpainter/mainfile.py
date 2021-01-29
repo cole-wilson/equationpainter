@@ -14,7 +14,8 @@ import os
 
 
 
-def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom="", maxans=100, numq=20):
+def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom="", maxans=100, numq=20,
+		 dirs="", offset=3, copyright="", mergeheight=3, pixelcol=1.5):
 	try:
 		os.mkdir(os.path.expanduser("~" + os.sep + 'Desktop'))
 	except FileExistsError:
@@ -40,7 +41,6 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 
 	max_answer = maxans
 	siz = width
-	offset = 3
 
 	if custom != "":
 		eqs = custom.split('\n')
@@ -82,7 +82,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 		newdata.append(keyRGB[color])
 	data = newdata
 	white = workbook.add_format({'font_color': "#ffffff"})
-	index3 = 3
+	index3 = mergeheight
 	merge_format1 = workbook.add_format({'align': 'right', "valign": "vcenter", "font_size": 20})
 	merge_format2 = workbook.add_format({'align': 'center', "valign": "vcenter", "font_size": 20})
 	merge_format3 = workbook.add_format({'align': 'center', "valign": "vcenter", "font_size": 10, "bold": True})
@@ -90,15 +90,15 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	merge_format2.set_text_wrap()
 	merge_format1.set_text_wrap()
 
-	worksheet.merge_range(0, 0, 2, 2,
-						  "Answer the problems below to paint the picture! You may have to zoom out a little.",
+	worksheet.merge_range(0, 0, mergeheight-1, offset-1,
+						  dirs,
 						  merge_format3)
 	for index, answer in enumerate(answers):
 		hexcode = key[answer]
 		forma = workbook.add_format({'font_color': "#aaaaaa", "bold": True})
 		forma.set_pattern(1)
 		forma.set_bg_color(hexcode)
-		worksheet.conditional_format(index3, 1, index3 + 2, 1, {'type': 'cell',
+		worksheet.conditional_format(index3, 1, index3 + mergeheight - 1, 1, {'type': 'cell',
 																'criteria': '=',
 																'value': answer,
 																'format': forma
@@ -114,15 +114,15 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 			equation = "{} {} {} =".format(p1, operation, p2)
 		else:
 			equation = eqs[index].split('|=>|')[0]
-		worksheet.merge_range(index3, 0, index3 + 2, 0, equation, merge_format1)
+		worksheet.merge_range(index3, 0, index3 + mergeheight - 1, 0, equation, merge_format1)
 		# print(index3,0,index3+2,0)
 		if prefill:
 			prefill_number = answer
 		else:
 			prefill_number = ""
-		worksheet.merge_range(index3, 1, index3 + 2, 1, prefill_number, merge_format2)
-		index3 += 3
-	worksheet.merge_range(index3, 0, index3 + 2, 2, "Made with EquationPainter", merge_format2)
+		worksheet.merge_range(index3, 1, index3 + mergeheight - 1, 1, prefill_number, merge_format2)
+		index3 += mergeheight
+	worksheet.merge_range(index3, 0, index3 + mergeheight - 1, 2, "Made with EquationPainter" if copyright=="true" else "", merge_format2)
 
 	count = 0
 	for row in range(height):
@@ -131,7 +131,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 			forma = workbook.add_format({'font_color': key[num_for]})
 			forma.set_pattern(1)
 			forma.set_bg_color(key[num_for])
-			worksheet.write(row, col + offset, "=B" + str((answers.index(num_for) * 3) + 4))
+			worksheet.write(row, col + offset, "=B" + str((answers.index(num_for) * mergeheight + 1) + 4))
 			worksheet.conditional_format(row, col + offset, row, col + offset, {'type': 'cell',
 																				'criteria': '=',
 																				'value': num_for,
@@ -147,8 +147,9 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	worksheet.ignore_errors({'empty_cell_reference': 'A1:XFD1048576'})
 	worksheet.ignore_errors({'formula_differs': 'A1:XFD1048576'})
 	worksheet.set_zoom(85)
-	worksheet.set_column(offset, offset + width, 1.5)
+	worksheet.set_column(offset, offset + width, pixelcol)
 	worksheet.set_column(0, 0, 25)
+
 	worksheet.hide_gridlines(2)
 	workbook.close()
 	return os.path.expanduser("~" + os.sep + 'Desktop' + os.sep + 'EquationPainter') + os.sep + name
