@@ -176,7 +176,7 @@ You may have to zoom out.
 				else if (url=="" && path==""){document.getElementById('errortext').innerHTML = 'Please provide a path or URL to your image.'}
 				else{
 					document.getElementById('errortext').innerHTML = 'Loading...';
-
+					document.getElementById('goodtext').innerHTML = "";
 					eel.generate(name,prefill,url,path,width,type,custom,maxans,numq,dirs,offset,copyright,mergeheight,pixelcol,anscol,initzoom);
 				}
 			}
