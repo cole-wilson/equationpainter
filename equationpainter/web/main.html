@@ -63,7 +63,7 @@
 				<table>
 					<tr><td>Url to image:</td><td><input type="url" id="url"></td></tr>
 					<tr><td style="text-align:center;" colspan="2">OR</td></tr>
-					<tr><td>Path to image:</td><td><input id="path" placeholder="~/Desktop/file.png"></td></tr>
+					<tr><td>Path to image:</td><td><input id="path" placeholder="~/Desktop/file.png"><button onclick="eel.getFile()">...</button></td></tr>
 					<tr><td>Image width in pixels:</td><td><input type="number" min="3" value="70" id="width"></td></tr>
 				</table>
 			</fieldset>
@@ -150,6 +150,10 @@
 			eel.expose(load_preview);
 			function load_preview(){
 				document.getElementById('preview').src = "preview.png?" + new Date().getTime();
+			}
+			eel.expose(getfile);
+			function getfile(nam) {
+				document.getElementById('path').value = nam;
 			}
 			eel.expose(done);
 			function done() {

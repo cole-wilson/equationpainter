@@ -13,6 +13,7 @@ import requests
 import os
 
 
+
 def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom="", maxans=100, numq=20):
 	try:
 		os.mkdir(os.path.expanduser("~" + os.sep + 'Desktop'))

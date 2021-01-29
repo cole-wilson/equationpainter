@@ -4,7 +4,14 @@ import sys
 import os
 import requests
 from PIL import Image
+from tkinter import Tk
+from tkinter.filedialog import askopenfilename, asksaveasfile
 
+@eel.expose
+def getFile():
+	Tk().withdraw()
+	filename = asksaveasfile(initialdir=os.path.expanduser("~" + os.sep + 'Desktop'))
+	eel.chosefile(filename)
 
 bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
 path_to_dat = os.path.abspath(os.path.join(bundle_dir, 'web'))
