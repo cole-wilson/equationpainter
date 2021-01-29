@@ -101,10 +101,11 @@ You may have to zoom out.
 					<tr><td>Column Offeset</td><td><input type="number" min=3 value=3 max=10 id="offset"></td></tr>
 					<tr><td>Merge Height</td><td><input type="number" min=3 value=3 max=10 id="mh"></td></tr>
 					<tr><td>Pixel Widths</td><td><input type="number" min=0.01 value=1.5 max=4 id="pixelcol"></td></tr>
-					
-
+					<tr><td>Answer Text Color</td><td><input type="color" value="#aaaaaa" id="anscol"></td></tr>
+					<tr><td>Initial Zoom (excel)</td><td><input type="number" value=70 max=500 min=10 id="initzoom"></td></tr>
 				</table>
 			</fieldset>
+			
 			</details>
 			<div style="text-align: center"><br>
 				Preview image:<br><br>
@@ -112,7 +113,6 @@ You may have to zoom out.
 				<button onclick="gen()">Generate Spreadsheet!</button><br>
 				<span style="color:red;" id="errortext"></span><br>
 				<span style="color:green;" id="goodtext"></span>
-
 			</div>
 		</div>
 		<br><br><br><hr>
@@ -168,6 +168,8 @@ You may have to zoom out.
 				var copyright = document.getElementById('copyright').value;
 				var mergeheight = document.getElementById('mh').value;
 				var pixelcol = document.getElementById('pixelcol').value;
+				var anscol = document.getElementById('anscol').value;
+				var initzoom = document.getElementById('initzoom').value;
 
 
 				if (name == ""){document.getElementById('errortext').innerHTML = 'Please provide name for your spreadsheet.'}
@@ -175,7 +177,7 @@ You may have to zoom out.
 				else{
 					document.getElementById('errortext').innerHTML = 'Loading...';
 
-					eel.generate(name,prefill,url,path,width,type,custom,maxans,numq,dirs,offset,copyright,mergeheight,pixelcol);
+					eel.generate(name,prefill,url,path,width,type,custom,maxans,numq,dirs,offset,copyright,mergeheight,pixelcol,anscol,initzoom);
 				}
 			}
 

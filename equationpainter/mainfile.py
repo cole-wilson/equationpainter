@@ -15,7 +15,7 @@ import os
 
 
 def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom="", maxans=100, numq=20,
-		 dirs="", offset=3, copyright="", mergeheight=3, pixelcol=1.5):
+		 dirs="", offset=3, copyright="", mergeheight=3, pixelcol=1.5,anscol="#aaaaaa",initzoom=70):
 	try:
 		os.mkdir(os.path.expanduser("~" + os.sep + 'Desktop'))
 	except FileExistsError:
@@ -69,7 +69,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	count = 0
 	if maxans < questions:
 		maxans = questions + 1
-	randomints = random.shuffle(list(range(0,maxans)))
+	randomints = random.sample(list(range(0,maxans)),questions)
 	print(randomints)
 	for icount,color in enumerate(colors):  # todo: make it so that there are no white colors.
 		if filename != "":
@@ -99,7 +99,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 						  merge_format3)
 	for index, answer in enumerate(answers):
 		hexcode = key[answer]
-		forma = workbook.add_format({'font_color': "#aaaaaa", "bold": True})
+		forma = workbook.add_format({'font_color': anscol, "bold": True})
 		forma.set_pattern(1)
 		forma.set_bg_color(hexcode)
 		worksheet.conditional_format(index3, 1, index3 + mergeheight - 1, 1, {'type': 'cell',
@@ -150,7 +150,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	worksheet.ignore_errors({'number_stored_as_text': 'A1:XFD1048576'})
 	worksheet.ignore_errors({'empty_cell_reference': 'A1:XFD1048576'})
 	worksheet.ignore_errors({'formula_differs': 'A1:XFD1048576'})
-	worksheet.set_zoom(85)
+	worksheet.set_zoom(initzoom)
 	worksheet.set_column(offset, offset + width, pixelcol)
 	worksheet.set_column(0, 0, 25)
 
