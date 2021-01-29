@@ -72,7 +72,14 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 			num = int(eqs[count].split('|=>|')[1].replace(' ', ''))
 			count += 1
 		else:
-			num = random.randint(0, max_answer)
+			coutnera = 0
+			while True:
+				coutnera += 1
+				num = random.randint(0, max_answer)
+				if num not in answers:
+					break
+				if coutnera >= maxans:
+					maxans += 50
 		key[num] = '#%02x%02x%02x' % color
 		keyRGB[color] = num
 		answers.append(num)
@@ -131,7 +138,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 			forma = workbook.add_format({'font_color': key[num_for]})
 			forma.set_pattern(1)
 			forma.set_bg_color(key[num_for])
-			worksheet.write(row, col + offset, "=B" + str((answers.index(num_for) * mergeheight + 1) + 4))
+			worksheet.write(row, col + offset, "=B" + str((answers.index(num_for) * mergeheight + 1) + mergeheight))
 			worksheet.conditional_format(row, col + offset, row, col + offset, {'type': 'cell',
 																				'criteria': '=',
 																				'value': num_for,

@@ -15,11 +15,11 @@ try:
   with open("README.md", "r") as fh:
 	  long_description = fh.read()
 except:
-	long_description = "# EquationPainterfsdjfgksjdghfsjdkfgh\nA way for teachers to make equation painter worksheets for their students.\n### Contributors\n- Cole Wilson\n### Contact\n<cole@colewilson.xyz> "
+	long_description = "# EquationPainter\nA way for teachers to make equation painter worksheets for their students.\n### Contributors\n- Cole Wilson\n### Contact\n<cole@colewilson.xyz> "
 
 options = {
 	"name":"equationpainter",
-	"version":"3.3.15",
+	"version":"3.3.16",
 	"scripts":[],
 	"entry_points":{'console_scripts': ['eqpaint=equationpainter.__main__:main']},
 	"author":"Cole Wilson",
