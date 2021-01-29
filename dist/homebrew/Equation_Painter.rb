@@ -1,6 +1,6 @@
 # Created with sailboat, the Python releaser
 
-# v3.3.9
+# v3.3.10
 
 class Equation_Painter < Formula
   include Language::Python::Virtualenv

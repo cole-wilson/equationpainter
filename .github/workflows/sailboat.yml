@@ -40,7 +40,6 @@ jobs:
     - name: Install Dependencies and Build
       run: |
         pip install eel
-        pip install tkinter
         pip install pyinstaller
         pip install pillow
         pip install sailboat
