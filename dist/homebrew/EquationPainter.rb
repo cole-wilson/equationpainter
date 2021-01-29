@@ -1,8 +1,8 @@
 # Created with sailboat, the Python releaser
 
-# v3.3.13
+# v3.3.14
 
-class Equation_Painter < Formula
+class EquationPainter < Formula
   include Language::Python::Virtualenv
 
   desc "A way for teachers to make equation painter worksheets for their students."
