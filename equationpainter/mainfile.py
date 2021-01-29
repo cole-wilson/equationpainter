@@ -69,7 +69,8 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	count = 0
 	if maxans < questions:
 		maxans = questions + 1
-	randomints = random.shuffle(range(0,maxans))
+	randomints = random.shuffle(list(range(0,maxans)))
+	print(randomints)
 	for icount,color in enumerate(colors):  # todo: make it so that there are no white colors.
 		if filename != "":
 			num = int(eqs[count].split('|=>|')[1].replace(' ', ''))
