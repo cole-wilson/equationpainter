@@ -102,7 +102,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 																'value': answer,
 																'format': forma
 																})
-		if filename == "":
+		if eqtype != "custom":
 			operation = random.choice(operations)
 			if operation == "+":
 				p1 = random.randint(0, answer)
