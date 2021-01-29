@@ -67,19 +67,15 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	keyRGB = {}
 	answers = []
 	count = 0
-	for color in colors:  # todo: make it so that there are no white colors.
+	if maxans < questions:
+		maxans = questions + 1
+	randomints = random.shuffle(range(0,maxans))
+	for icount,color in enumerate(colors):  # todo: make it so that there are no white colors.
 		if filename != "":
 			num = int(eqs[count].split('|=>|')[1].replace(' ', ''))
 			count += 1
 		else:
-			coutnera = 0
-			while True:
-				coutnera += 1
-				num = random.randint(0, max_answer)
-				if num not in answers:
-					break
-				if coutnera >= maxans:
-					maxans += 50
+			num = randomints[icount]
 		key[num] = '#%02x%02x%02x' % color
 		keyRGB[color] = num
 		answers.append(num)
