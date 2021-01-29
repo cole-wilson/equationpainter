@@ -31,7 +31,7 @@ def generate(name, prefill, url, path, width, eqtype, custom, maxans, numq,dirs,
 		custom=custom,
 		maxans=int(maxans),
 		numq=int(numq),
-		dirs=dirs, offset=int(offset), copyright=copyright, mergeheight=int(mergeheight),pixelcol=int(pixelcol)
+		dirs=dirs, offset=int(offset), copyright=copyright, mergeheight=int(mergeheight),pixelcol=float(pixelcol)
 	)
 	print(filename)
 	eel.done()
