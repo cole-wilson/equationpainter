@@ -85,8 +85,8 @@
 				</table>
 			</fieldset>
 			<div style="text-align: center"><br>
-<!--				Preview image:<br><br>-->
-<!--				<img src="https://google.com/favicon.ico" style="width: 100px"><br><br>-->
+				Preview image:<br><br>
+				<img src="https://google.com/favicon.ico" style="width: 100px"><br><br>
 				<button onclick="gen()">Generate Spreadsheet!</button><br>
 				<span style="color:red;" id="errortext"></span><br>
 				<span style="color:green;" id="goodtext"></span>
@@ -97,6 +97,9 @@
 		&copy; 2021 Cole Wilson
         <script src="/eel.js"></script>
   		<script>
+			document.getElementById('url').onchange = prevpre;
+			document.getElementById('path').onchange = prevpre;
+
 			document.getElementById('eqtype').onchange = function(){
 				if (this.value == "custom") {
 					document.getElementById('maxans').disabled = true;
@@ -109,6 +112,18 @@
 					document.getElementById('eqfile').disabled = true;
 				}
 			};
+			function prevpre() {
+				var name = document.getElementById('name').value;
+				var prefill = document.getElementById('prefill').value;
+				var url = document.getElementById('url').value;
+				var path = document.getElementById('path').value;
+				var width = document.getElementById('width').value;
+				var type = document.getElementById('eqtype').value;
+				var custom = document.getElementById('eqfile').value;
+				var maxans = document.getElementById('maxans').value;
+				var numq = document.getElementById('numq').value;
+				eel.prev(name,prefill,url,path,width,type,custom,maxans,numq);
+			}
 			function gen() {
 				var name = document.getElementById('name').value;
 				var prefill = document.getElementById('prefill').value;
@@ -128,6 +143,10 @@
 				}
 			}
 
+			eel.expose(load_preview);
+			function load_preview(){
+				document.getElementById('preview').src = "preview.png";
+			}
 			eel.expose(done);
 			function done() {
 				document.getElementById('goodtext').innerHTML = 'Your file has been created!<br><button onclick="eel.launch()">Open Spreadsheet</button>';

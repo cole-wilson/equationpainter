@@ -41,8 +41,8 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	siz = width
 	offset = 3
 
-	if filename != "":
-		eqs = open(os.path.expanduser("~" + os.sep + 'Desktop' + os.sep + filename)).read().split('\n')
+	if custom != "":
+		eqs = custom.split('\n')
 		questions = len(eqs)
 
 	# data = image pixels
