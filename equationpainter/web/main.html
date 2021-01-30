@@ -26,7 +26,7 @@
   </head>
   <body>
 		<h1 align="center">EquationPainter</h1>
-		<details><summary>Help/Instructions</summary>
+		<details id="helptexta"><summary>Help/Instructions</summary>
 		Welcome to EquationPainter!
 		<br><br>
 		EquationPainter will help you create "paint-by-equation" spreadsheets for your students. They will love it!
@@ -115,7 +115,7 @@ You may have to zoom out.</textarea></td></tr>
 			
 			</details>
 			<div style="text-align: center"><br>
-				Preview image:<br><br>
+				Preview image:<br>(<a onclick="prevpre()")>reload</a>)<br><br>
 				<img id="preview" src="#" style="width: 300px"><br><br>
 				<button onclick="gen()">Generate Spreadsheet!</button><br>
 				<span style="color:red;" id="errortext"></span><br>
@@ -123,9 +123,13 @@ You may have to zoom out.</textarea></td></tr>
 			</div>
 		</div>
 		<br><br><br><hr>
-		&copy; 2021 Cole Wilson
+		&copy; 2021 <a href="//github.com/cole-wilson" target="_blank">Cole Wilson</a> &middot; MIT License
         <script src="/eel.js"></script>
   		<script>
+			if (localStorage.getItem("help") === null) {
+				document.getElementById('maxans').open = true;
+				localStorage.setItem('help','alreadydone')
+			}
 			document.getElementById('url').onchange = prevpre;
 			document.getElementById('path').onchange = prevpre;
 			document.getElementById('numq').onchange = prevpre;
