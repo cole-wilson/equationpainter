@@ -22,7 +22,7 @@ filename = ""
 @eel.expose
 def save(*args):
 	Tk().withdraw()
-	fname = askopenfilename(initialfile="presetname",defaultextension=[("JSON Preset File",".json")],initialdir=os.path.expanduser("~" + os.sep + 'Desktop' + os.sep + "EquationPainter" + os.sep + "presets"))
+	fname = asksaveasfile(initialfile="presetname",defaultextension=[("JSON Preset File",".json")],initialdir=os.path.expanduser("~" + os.sep + 'Desktop' + os.sep + "EquationPainter" + os.sep + "presets"))
 	a = open(fname,'w+')
 	a.write(json.dumps(args, indent=4, sort_keys=True))
 
