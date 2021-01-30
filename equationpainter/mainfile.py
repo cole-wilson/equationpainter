@@ -48,21 +48,25 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 		a = requests.get(url, stream=True).raw
 	else:
 		a = os.path.expanduser(path)
-
+	if custom != "":
+		eqs = []
+		for line in custom.split('\n'):
+			if "|=>|" in line:
+				eqs.append(tuple(line.split('|=>|')))
+		print(eqs)
+		questions = len(eqs)
 	img = Image.open(a)
 	change_in_size = img.width / siz
 	new_height = round(img.height / change_in_size)
 	result = img.resize((siz, new_height), resample=Image.BILINEAR)
-	questions = numq
+	if custom == "":
+		questions = numq
 	width, height = result.size
 	result = result.convert('P', palette=Image.ADAPTIVE, colors=questions)
 	result = result.convert('RGB', palette=Image.ADAPTIVE, colors=questions)
 	data = list(result.getdata())
 	colors = set(data)
-	if custom != "":
-		eqs = custom.split('\n')
-		questions = len(eqs)
-		print(questions)
+
 	key = {}
 	keyRGB = {}
 	answers = []
@@ -70,11 +74,12 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	if maxans < questions:
 		maxans = questions + 1
 	randomints = random.sample(list(range(0,maxans)),questions)
-	print(randomints)
+	print(questions)
+	print(colors)
 	for icount,color in enumerate(colors):  # todo: make it so that there are no white colors.
 		if filename != "":
-			num = int(eqs[count].split('|=>|')[1].replace(' ', ''))
-			print(questions)
+			print(eqs[count])
+			num = int(eqs[count-1][1].replace(' ', ''))
 			count += 1
 		else:
 			num = randomints[icount]
@@ -118,7 +123,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 				p2 = answer + p1
 			equation = "{} {} {} =".format(p1, operation, p2)
 		else:
-			equation = eqs[index].split('|=>|')[0]
+			equation = eqs[index][0]
 		worksheet.merge_range(index3, 0, index3 + mergeheight - 1, 0, equation, merge_format1)
 		# print(index3,0,index3+2,0)
 		if prefill:

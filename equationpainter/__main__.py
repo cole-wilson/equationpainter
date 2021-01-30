@@ -54,7 +54,10 @@ def prev(name, prefill, url, path, width, eqtype, custom, maxans, numq):
 	result = img.resize((width, new_height), resample=Image.BILINEAR)
 	questions = numq
 	if custom != "":
-		eqs = custom.split('\n')
+		eqs = []
+		for line in custom.split('\n'):
+			if "|=>|" in line:
+				eqs.append(tuple(line.split('|=>|')))
 		questions = len(eqs)
 	width, height = result.size
 	result = result.convert('P', palette=Image.ADAPTIVE, colors=questions)
