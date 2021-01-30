@@ -19,15 +19,15 @@ path_to_dat = os.path.abspath(os.path.join(bundle_dir, 'web'))
 # input(path_to_dat)
 # input(getattr(sys, '_MEIPASS'))
 filename = ""
-@eel.save
+@eel.expose
 def save(*args):
 	Tk().withdraw()
 	fname = askopenfilename(initialfile="presetname",defaultextension=[("JSON Preset File",".json")],initialdir=os.path.expanduser("~" + os.sep + 'Desktop' + os.sep + "EquationPainter" + os.sep + "presets"))
 	a = open(fname,'w+')
 	a.write(json.dumps(args, indent=4, sort_keys=True))
 
-@eel.save
-def save(*args):
+@eel.expose
+def load(*args):
 	Tk().withdraw()
 	fname = askopenfilename(initialdir=os.path.expanduser("~" + os.sep + 'Desktop' + os.sep + "EquationPainter" + os.sep + "presets"))
 	a = open(fname,'r')
