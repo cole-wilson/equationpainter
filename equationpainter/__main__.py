@@ -19,7 +19,7 @@ path_to_dat = os.path.abspath(os.path.join(bundle_dir, 'web'))
 # input(getattr(sys, '_MEIPASS'))
 filename = ""
 @eel.expose
-def generate(name, prefill, url, path, width, eqtype, custom, maxans, numq,dirs,offset,copyright,mergeheight,pixelcol,anscol,initzoom):
+def generate(name, prefill, url, path, width, eqtype, custom, maxans, numq,dirs,offset,copyright,mergeheight,pixelcol,anscol,initzoom,fontsize):
 	global filename
 	filename = mainfile.main(
 		name=name,
@@ -33,7 +33,8 @@ def generate(name, prefill, url, path, width, eqtype, custom, maxans, numq,dirs,
 		numq=int(numq),
 		dirs=dirs, offset=int(offset), copyright=copyright, mergeheight=int(mergeheight),pixelcol=float(pixelcol),
 		anscol=anscol,
-		initzoom=round(float(initzoom))
+		initzoom=round(float(initzoom)),
+		fontsize=fontsize
 	)
 	print(filename)
 	eel.done()

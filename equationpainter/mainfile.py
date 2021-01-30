@@ -15,7 +15,7 @@ import os
 
 
 def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom="", maxans=100, numq=20,
-		 dirs="", offset=3, copyright="", mergeheight=3, pixelcol=1.5,anscol="#aaaaaa",initzoom=70):
+		 dirs="", offset=3, copyright="", mergeheight=3, pixelcol=1.5,anscol="#aaaaaa",initzoom=70,fontsize=20):
 	try:
 		os.mkdir(os.path.expanduser("~" + os.sep + 'Desktop'))
 	except FileExistsError:
@@ -87,8 +87,8 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	data = newdata
 	white = workbook.add_format({'font_color': "#ffffff"})
 	index3 = mergeheight
-	merge_format1 = workbook.add_format({'align': 'right', "valign": "vcenter", "font_size": 20})
-	merge_format2 = workbook.add_format({'align': 'center', "valign": "vcenter", "font_size": 20})
+	merge_format1 = workbook.add_format({'align': 'right', "valign": "vcenter", "font_size": fontsize})
+	merge_format2 = workbook.add_format({'align': 'center', "valign": "vcenter", "font_size": fontsize})
 	merge_format3 = workbook.add_format({'align': 'center', "valign": "vcenter", "font_size": 10, "bold": True})
 	merge_format3.set_text_wrap()
 	merge_format2.set_text_wrap()
