@@ -42,9 +42,6 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	max_answer = maxans
 	siz = width
 
-	if custom != "":
-		eqs = custom.split('\n')
-		questions = len(eqs)
 
 	# data = image pixels
 	if url != "":
@@ -62,7 +59,10 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	result = result.convert('RGB', palette=Image.ADAPTIVE, colors=questions)
 	data = list(result.getdata())
 	colors = set(data)
-
+	if custom != "":
+		eqs = custom.split('\n')
+		questions = len(eqs)
+		print(questions)
 	key = {}
 	keyRGB = {}
 	answers = []
@@ -74,6 +74,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	for icount,color in enumerate(colors):  # todo: make it so that there are no white colors.
 		if filename != "":
 			num = int(eqs[count].split('|=>|')[1].replace(' ', ''))
+			print(questions)
 			count += 1
 		else:
 			num = randomints[icount]
