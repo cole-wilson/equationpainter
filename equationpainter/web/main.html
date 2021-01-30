@@ -47,6 +47,13 @@
 		<hr>
 
 			<fieldset>
+				<legend>Presets</legend>
+				<table>
+					<tr><td><button onclick="load()">Load</button></td><td><button onclick="save()">Save</button></tr>
+				</table>
+			</fieldset>
+
+			<fieldset>
 				<legend>General</legend>
 				<table>
 					<tr><td>Spreadsheet name:</td><td><input style="width: 130px" id="name" placeholder="sheet">.xlsx</td></tr>
@@ -96,15 +103,13 @@
 						</select>
 					</td></tr>
 					<tr><td>Custom directions:</td><td><textarea rows="7" style="resize: none;width: 100%" id="dirs">Fill out the answers to paint the picture.
-You may have to zoom out.
-					</textarea></td></tr>
+You may have to zoom out.</textarea></td></tr>
 					<tr><td>Column Offeset</td><td><input type="number" min=3 value=3 max=10 id="offset"></td></tr>
 					<tr><td>Merge Height</td><td><input type="number" min=3 value=3 max=10 id="mh"></td></tr>
 					<tr><td>Pixel Widths</td><td><input type="number" min=0.01 value=1.5 max=4 id="pixelcol"></td></tr>
 					<tr><td>Font Size</td><td><input type="number" min=2 value=20 max=2000 id="fontsize"></td></tr>
-					
 					<tr><td>Answer Text Color</td><td><input type="color" value="#aaaaaa" id="anscol"></td></tr>
-					<tr><td>Initial Zoom (excel)</td><td><input type="number" value=70 max=500 min=10 id="initzoom"></td></tr>
+					<tr><td>Initial Zoom (Excel %)</td><td><input type="number" value=70 max=500 min=10 id="initzoom"></td></tr>
 				</table>
 			</fieldset>
 			
@@ -154,6 +159,49 @@ You may have to zoom out.
 				if (name != "" || path != "") {
 					eel.prev(name, prefill, url, path, width, type, custom, maxans, numq);
 				}
+			}
+			function save() {
+				var name = document.getElementById('name').value;
+				var prefill = document.getElementById('prefill').value;
+				var url = document.getElementById('url').value;
+				var path = document.getElementById('path').value;
+				var width = document.getElementById('width').value;
+				var type = document.getElementById('eqtype').value;
+				var custom = document.getElementById('eqfile').value;
+				var maxans = document.getElementById('maxans').value;
+				var numq = document.getElementById('numq').value;
+				var dirs = document.getElementById('dirs').value;
+				var offset = document.getElementById('offset').value;
+				var copyright = document.getElementById('copyright').value;
+				var mergeheight = document.getElementById('mh').value;
+				var pixelcol = document.getElementById('pixelcol').value;
+				var anscol = document.getElementById('anscol').value;
+				var initzoom = document.getElementById('initzoom').value;
+				var fontsize = document.getElementById('fontsize').value;
+				eel.save(name,prefill,url,path,width,type,custom,maxans,numq,dirs,offset,copyright,mergeheight,pixelcol,anscol,initzoom,fontsize);
+			}
+			function load() {
+				eel.load()
+			}
+			eel.expose(loadpreset);
+			function loadpreset(name, prefill, url, path, width, eqtype, custom, maxans, numq,dirs,offset,copyright,mergeheight,pixelcol,anscol,initzoom,fontsize) {
+				var name = document.getElementById('name').value = name;
+				var prefill = document.getElementById('prefill').value = prefill;
+				var url = document.getElementById('url').value = url;
+				var path = document.getElementById('path').value = path;
+				var width = document.getElementById('width').value = width;
+				var type = document.getElementById('eqtype').value = eqtype;
+				var custom = document.getElementById('eqfile').value = custom;
+				var maxans = document.getElementById('maxans').value = maxans;
+				var numq = document.getElementById('numq').value = numq;
+				var dirs = document.getElementById('dirs').value = dirs;
+				var offset = document.getElementById('offset').value = offset;
+				var copyright = document.getElementById('copyright').value = copyright;
+				var mergeheight = document.getElementById('mh').value = mergeheight;
+				var pixelcol = document.getElementById('pixelcol').value = pixelcol;
+				var anscol = document.getElementById('anscol').value = anscol;
+				var initzoom = document.getElementById('initzoom').value = initzoom;
+				var fontsize = document.getElementById('fontsize').value = fontsize;
 			}
 			function gen() {
 				var name = document.getElementById('name').value;

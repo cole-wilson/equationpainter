@@ -6,6 +6,7 @@ import requests
 from PIL import Image
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename, asksaveasfile
+import json
 
 @eel.expose
 def getFile():
@@ -18,6 +19,22 @@ path_to_dat = os.path.abspath(os.path.join(bundle_dir, 'web'))
 # input(path_to_dat)
 # input(getattr(sys, '_MEIPASS'))
 filename = ""
+@eel.save
+def save(*args):
+	Tk().withdraw()
+	fname = askopenfilename(initialfile="presetname",defaultextension=[("JSON Preset File",".json")],initialdir=os.path.expanduser("~" + os.sep + 'Desktop' + os.sep + "EquationPainter" + os.sep + "presets"))
+	a = open(fname,'w+')
+	a.write(json.dumps(args, indent=4, sort_keys=True))
+
+@eel.save
+def save(*args):
+	Tk().withdraw()
+	fname = askopenfilename(initialdir=os.path.expanduser("~" + os.sep + 'Desktop' + os.sep + "EquationPainter" + os.sep + "presets"))
+	a = open(fname,'r')
+	d = json.loads(a.read())
+	a.close()
+	eel.loadpreset(*d)
+
 @eel.expose
 def generate(name, prefill, url, path, width, eqtype, custom, maxans, numq,dirs,offset,copyright,mergeheight,pixelcol,anscol,initzoom,fontsize):
 	global filename

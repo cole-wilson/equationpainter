@@ -12,8 +12,6 @@ import xlsxwriter
 import requests
 import os
 
-
-
 def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom="", maxans=100, numq=20,
 		 dirs="", offset=3, copyright="", mergeheight=3, pixelcol=1.5,anscol="#aaaaaa",initzoom=70,fontsize=20):
 	try:
@@ -24,6 +22,11 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 		os.mkdir(os.path.expanduser("~" + os.sep + 'Desktop' + os.sep + 'EquationPainter'))
 	except FileExistsError:
 		pass
+	try:
+		os.mkdir(os.path.expanduser("~" + os.sep + 'Desktop' + os.sep + 'EquationPainter' + os.sep + "templates"))
+	except FileExistsError:
+		pass
+	
 	name = '{}.xlsx'.format(name)
 	# print("Your spreadsheet will be named",name+",","and saved on your Desktop in a folder called EquationPainter.")
 	workbook = xlsxwriter.Workbook(
