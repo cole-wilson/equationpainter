@@ -135,8 +135,11 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 			prefill_number = ""
 		worksheet.merge_range(index3, 2*(index//wrap) + 1, index3 + mergeheight - 1, 2*(index//wrap) + 1, prefill_number, merge_format2)
 		index3 += mergeheight
+		if index % wrap == 0:
+			index3 = mergeheight
 	worksheet.merge_range(index3, 0, index3 + mergeheight - 1, 2, "Made with EquationPainter" if copyright=="true" else "", merge_format2)
 
+	offset = offset + (questions//wrap)
 	count = 0
 	for row in range(height):
 		for col in range(width):
