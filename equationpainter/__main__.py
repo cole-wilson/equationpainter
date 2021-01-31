@@ -29,14 +29,6 @@ def save(*args):
 	a.write(json.dumps(args, indent=4, sort_keys=True))
 
 @eel.expose
-def upload():
-	from pydrive.drive import GoogleDrive 
-	from pydrive.auth import GoogleAuth
-	gauth = GoogleAuth() 
-	gauth.LocalWebserverAuth()        
-	drive = GoogleDrive(gauth) 
-
-@eel.expose
 def load(*args):
 	Tk().withdraw()
 	fname = askopenfilename(initialdir=os.path.expanduser("~" + os.sep + 'Desktop' + os.sep + "EquationPainter" + os.sep + "presets"))
@@ -61,7 +53,7 @@ def generate(name, prefill, url, path, width, eqtype, custom, maxans, numq,dirs,
 		dirs=dirs, offset=int(offset), copyright=copyright, mergeheight=int(mergeheight),pixelcol=float(pixelcol),
 		anscol=anscol,
 		initzoom=round(float(initzoom)),
-		fontsize=fontsize
+		fontsize=int(fontsize)
 	)
 	print(filename)
 	eel.done()
