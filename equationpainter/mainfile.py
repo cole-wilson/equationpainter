@@ -13,7 +13,7 @@ import requests
 import os
 
 def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom="", maxans=100, numq=20,
-		 dirs="", offset=3, copyright="", mergeheight=3, pixelcol=1.5,anscol="#aaaaaa",initzoom=70,fontsize=20):
+		 dirs="", offset=3, copyright="", mergeheight=3, pixelcol=1.5,anscol="#aaaaaa",initzoom=70,fontsize=20,wrap=10):
 	try:
 		os.mkdir(os.path.expanduser("~" + os.sep + 'Desktop'))
 	except FileExistsError:
@@ -111,7 +111,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 		forma = workbook.add_format({'font_color': anscol, "bold": True})
 		forma.set_pattern(1)
 		forma.set_bg_color(hexcode)
-		worksheet.conditional_format(index3, 1, index3 + mergeheight - 1, 1, {'type': 'cell',
+		worksheet.conditional_format(index3, index//wrap + 1, index3 + mergeheight - 1, index//wrap + 1, {'type': 'cell',
 																'criteria': '=',
 																'value': answer,
 																'format': forma
@@ -127,7 +127,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 			equation = "{} {} {} =".format(p1, operation, p2)
 		else:
 			equation = eqs[index][0]
-		worksheet.merge_range(index3, 0, index3 + mergeheight - 1, 0, equation, merge_format1)
+		worksheet.merge_range(index3, index//wrap, index3 + mergeheight - 1, index//wrap, equation, merge_format1)
 		# print(index3,0,index3+2,0)
 		if prefill:
 			prefill_number = answer
