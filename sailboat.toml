@@ -13,7 +13,7 @@ description = "A way for teachers to make equation painter worksheets for their 
 url = "https://github.com/cole-wilson/wsm"
 keywords = ""
 license = "MIT"
-latest_build = "3.3.39"
+latest_build = "3.3.40"
 release-notes = "added help stuff"
 latest_release = "3.3.37"
 
