@@ -115,8 +115,8 @@ You may have to zoom out.</textarea></td></tr>
 			
 			</details>
 			<div style="text-align: center"><br>
-				Preview image:<br>(<a onclick="prevpre()")>reload</a>)<br><br>
-				<img id="preview" src="#" style="width: 300px"><br><br>
+				Preview image:<br>(<a style="cursor:pointer;" onclick="prevpre()")> click to reload</a>)<br><br>
+				<img id="preview" style="cursor:pointer;" src="#" onclick="prevpre()" style="width: 300px"><br><br>
 				<button onclick="gen()">Generate Spreadsheet!</button><br>
 				<span style="color:red;" id="errortext"></span><br>
 				<span style="color:green;" id="goodtext"></span>
@@ -127,7 +127,7 @@ You may have to zoom out.</textarea></td></tr>
         <script src="/eel.js"></script>
   		<script>
 			if (localStorage.getItem("help") === null) {
-				document.getElementById('maxans').open = true;
+				document.getElementById('helptexta').open = true;
 				localStorage.setItem('help','alreadydone')
 			}
 			document.getElementById('url').onchange = prevpre;
