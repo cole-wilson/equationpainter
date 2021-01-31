@@ -73,7 +73,7 @@ def prev(name, prefill, url, path, width, eqtype, custom, maxans, numq):
 	if custom != "":
 		eqs = []
 		for line in custom.split('\n'):
-			if "|=>|" in line:
+			if "|=>|" in line and not line.startwith('//'):
 				eqs.append(tuple(line.split('|=>|')))
 		questions = len(eqs)
 	width, height = result.size

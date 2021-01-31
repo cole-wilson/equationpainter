@@ -29,18 +29,21 @@
 		<details id="helptexta"><summary>Help/Instructions</summary>
 		Welcome to EquationPainter!
 		<br><br>
-		EquationPainter will help you create "paint-by-equation" spreadsheets for your students. They will love it!
+		EquationPainter will help you create "paint-by-equation" spreadsheets for your students. They will love it! It will also teach them the much needed skills of arithmetic, they won't even notice how much they will learn!
 		All you need is an image file.
 		<br><br>
-		EquationPainter lets you define a list of equations in a text file, with their answer seperated with "|=>|". An example is below.
+		EquationPainter lets you define a list of equations in a text file, with their answer seperated with "|=>|". An example is below. Each answer must be unique, and each answer must be a integer.
 		<br><textarea rows="3" readonly style="resize:none;">
+// (comment)
 1 + 2 = |=>| 3
 2 + 8 = |=>| 10
 4 + 6 = |=>| 10</textarea><br><br>
 
 		It can also generate a list of addition and/or subtraction problems for you.<br><br>
 
-		Every question has a color mapped to it, more questions means more colors in the output drawing.
+		Every question has a color mapped to it, more questions means more colors in the output drawing.<br><br>
+		If there are too many pixels, then the file may load too slowly.<br><br>
+		In order to convert to Google Sheets, then upload to Google Drive, then open in Google Sheets, after this you can push convert in the File menu.
 		<br><br>
 		Email <a href="mailto:support@colewilson.xyz">support@colewilson.xyz</a> for any questions or for help.
 		</details><div id="form">
@@ -49,7 +52,7 @@
 			<fieldset>
 				<legend>Presets</legend>
 				<table>
-					<tr><td><button onclick="load()">Load</button></td><td><button onclick="save()">Save</button></tr>
+					<tr><td><button onclick="load()">Load Preset File</button></td><td><button onclick="save()">Save Current Settings</button></tr>
 				</table>
 			</fieldset>
 
