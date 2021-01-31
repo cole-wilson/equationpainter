@@ -138,24 +138,24 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	worksheet.merge_range(index3, 0, index3 + mergeheight - 1, 2, "Made with EquationPainter" if copyright=="true" else "", merge_format2)
 
 	count = 0
-	for row in range(height):
-		for col in range(width):
-			num_for = data[count]
-			forma = workbook.add_format({'font_color': key[num_for]})
-			forma.set_pattern(1)
-			forma.set_bg_color(key[num_for])
-			worksheet.write(row, col + offset, "=B" + str((answers.index(num_for) * mergeheight + 1) + mergeheight))
-			worksheet.conditional_format(row, col + offset, row, col + offset, {'type': 'cell',
-																				'criteria': '=',
-																				'value': num_for,
-																				'format': forma
-																				})
-			worksheet.conditional_format(row, col + offset, row, col + offset, {'type': 'cell',
-																				'criteria': '!=',
-																				'value': num_for,
-																				'format': white
-																				})
-			count += 1
+	# for row in range(height):
+	# 	for col in range(width):
+	# 		num_for = data[count]
+	# 		forma = workbook.add_format({'font_color': key[num_for]})
+	# 		forma.set_pattern(1)
+	# 		forma.set_bg_color(key[num_for])
+	# 		worksheet.write(row, col + offset, "=B" + str((answers.index(num_for) * mergeheight + 1) + mergeheight))
+	# 		worksheet.conditional_format(row, col + offset, row, col + offset, {'type': 'cell',
+	# 																			'criteria': '=',
+	# 																			'value': num_for,
+	# 																			'format': forma
+	# 																			})
+	# 		worksheet.conditional_format(row, col + offset, row, col + offset, {'type': 'cell',
+	# 																			'criteria': '!=',
+	# 																			'value': num_for,
+	# 																			'format': white
+	# 																			})
+	# 		count += 1
 	worksheet.ignore_errors({'number_stored_as_text': 'A1:XFD1048576'})
 	worksheet.ignore_errors({'empty_cell_reference': 'A1:XFD1048576'})
 	worksheet.ignore_errors({'formula_differs': 'A1:XFD1048576'})
