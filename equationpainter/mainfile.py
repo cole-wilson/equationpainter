@@ -98,7 +98,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	index3 = mergeheight
 	merge_format1 = workbook.add_format({'align': 'right', "valign": "vcenter", "font_size": fontsize})
 	merge_format2 = workbook.add_format({'align': 'center', "valign": "vcenter", "font_size": fontsize})
-	merge_format3 = workbook.add_format({'align': 'center', "valign": "vcenter", "font_size": fontsize, "bold": True})
+	merge_format3 = workbook.add_format({'align': 'center', "valign": "vcenter", "font_size": round(fontsize*0.7), "bold": True})
 	merge_format3.set_text_wrap()
 	merge_format2.set_text_wrap()
 	merge_format1.set_text_wrap()
