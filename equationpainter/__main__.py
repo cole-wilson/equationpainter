@@ -6,6 +6,7 @@ import requests
 from PIL import Image
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename, asksaveasfile
+import tkinter.messagebox
 import json
 
 @eel.expose
