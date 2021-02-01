@@ -130,7 +130,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 			elif operation == "-":
 				p1 = random.randint(0, answer)
 				p2 = answer + p1
-			equation = "{} {} {} =".format(p1, operation, p2)
+			equation = "{} {} {} =".format(p2, operation, p1)
 		else:
 			equation = eqs[index][0]
 		worksheet.merge_range(index3, 0, index3 + mergeheight - 1, 0, equation, merge_format1)
