@@ -33,7 +33,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 		os.path.expanduser("~" + os.sep + 'Desktop' + os.sep) + 'EquationPainter' + os.sep + name)
 	worksheet = workbook.add_worksheet()
 
-	prefill = prefill
+	prefill = prefill == "true"
 
 	if custom != "":
 		filename = path
