@@ -42,7 +42,7 @@ def generate(name, prefill, url, path, width, eqtype, custom, maxans, numq,dirs,
 	global filename
 	filename = mainfile.main(
 		name=name,
-		prefill=bool(prefill),
+		prefill=prefill,
 		url=url,
 		path=path,
 		width=int(width),
