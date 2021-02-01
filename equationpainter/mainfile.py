@@ -11,9 +11,11 @@ import random
 import xlsxwriter
 import requests
 import os
+import logging
 
 def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom="", maxans=100, numq=20,
 		 dirs="", offset=3, copyright="", mergeheight=3, pixelcol=1.5,anscol="#aaaaaa",initzoom=70,fontsize=20):
+	logging.info("Starting generate: args: {}".format([name, prefill, url, path, width, eqtype, custom, maxans, numq,dirs,offset,copyright,mergeheight,pixelcol,anscol,initzoom,fontsize]))
 	try:
 		os.mkdir(os.path.expanduser("~" + os.sep + 'Desktop'))
 	except FileExistsError:
@@ -53,8 +55,10 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	# data = image pixels
 	if url != "":
 		a = requests.get(url, stream=True).raw
+		logging.info("Using url: {}".format(url))
 	else:
 		a = os.path.expanduser(path)
+		logging.info("Using path: {}".format(a))
 	if custom != "":
 		eqs = []
 		for line in custom.split('\n'):
@@ -62,6 +66,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 				eqs.append(tuple(line.split('|=>|')))
 		print(eqs)
 		questions = len(eqs)
+		logging.info("# of questions: {}".format(questions))
 	img = Image.open(a)
 	if url != "":
 		img.save(os.path.expanduser("~" + os.sep + 'Desktop' + os.sep + 'EquationPainter' + os.sep + "images" + os.sep + name.replace('.xlsx','') + ".png"),format="PNG")
@@ -71,8 +76,10 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	if custom == "":
 		questions = numq
 	width, height = result.size
+	logging.info("Desampling...")
 	result = result.convert('P', palette=Image.ADAPTIVE, colors=questions)
 	result = result.convert('RGB', palette=Image.ADAPTIVE, colors=questions)
+	logging.info("Desampled")
 	data = list(result.getdata())
 	colors = set(data)
 
@@ -83,8 +90,11 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	if maxans < questions:
 		maxans = questions + 1
 	randomints = random.sample(list(range(0,maxans)),questions)
+	logging.info("Made Random answers: {}".format(randomints))
+
 	print(questions)
 	print(colors)
+	logging.info("Unique colors: {}".format(colors))
 	for icount,color in enumerate(colors):  # todo: make it so that there are no white colors.
 		if filename != "":
 			print(eqs[count])
@@ -95,6 +105,9 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 		key[num] = '#%02x%02x%02x' % color
 		keyRGB[color] = num
 		answers.append(num)
+	logging.info("Made key: {}".format(key))
+	logging.info("Made keyRGB: {}".format(keyRGB))
+	logging.info("Made answers: {}".format(answers))
 
 	newdata = []
 	for color in data:
@@ -108,6 +121,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	merge_format3.set_text_wrap()
 	merge_format2.set_text_wrap()
 	merge_format1.set_text_wrap()
+	logging.info("Made formats for xlsxwriter.")
 
 	worksheet.merge_range(0, 0, mergeheight-1, offset-1,
 						  dirs,
@@ -131,6 +145,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 				p1 = random.randint(0, answer)
 				p2 = answer + p1
 			equation = "{} {} {} =".format(p2, operation, p1)
+			logging.info("Made equation: {}".format(equation))
 		else:
 			equation = eqs[index][0]
 		worksheet.merge_range(index3, 0, index3 + mergeheight - 1, 0, equation, merge_format1)
@@ -162,6 +177,8 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 																				'format': white
 																				})
 			count += 1
+		logging.info("Wrote pixels for row {}.".format(row))
+	logging.info("Wrote pixels.")
 	worksheet.ignore_errors({'number_stored_as_text': 'A1:XFD1048576'})
 	worksheet.ignore_errors({'empty_cell_reference': 'A1:XFD1048576'})
 	worksheet.ignore_errors({'formula_differs': 'A1:XFD1048576'})
@@ -171,4 +188,6 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 
 	worksheet.hide_gridlines(2)
 	workbook.close()
+	logging.info("Generated sheet.")
+
 	return os.path.expanduser("~" + os.sep + 'Desktop' + os.sep + 'EquationPainter') + os.sep + name
