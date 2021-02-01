@@ -12,7 +12,7 @@ import json
 
 bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
 path_to_dat = os.path.abspath(os.path.join(bundle_dir, 'web'))
-logging.basicConfig(filename=path_to_dat + os.sep + 'log.txt', level=logging.INFO,format="[%(asctime)s] %(levelname)s: %(message)s")
+logging.basicConfig(filename=path_to_dat + os.sep + 'log.txt', level=logging.INFO,format="[%(asctime)s] {%(name)s} %(levelname)s: %(message)s")
 
 @eel.expose
 def getFile():
