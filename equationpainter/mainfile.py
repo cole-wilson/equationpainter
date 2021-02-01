@@ -58,7 +58,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	if custom != "":
 		eqs = []
 		for line in custom.split('\n'):
-			if "|=>|" in line and not line.startwith('//'):
+			if "|=>|" in line and not line.startswith('//'):
 				eqs.append(tuple(line.split('|=>|')))
 		print(eqs)
 		questions = len(eqs)

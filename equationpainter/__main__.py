@@ -12,7 +12,7 @@ import json
 @eel.expose
 def getFile():
 	Tk().withdraw()
-	filename = askopenfilename(initialdir=os.path.expanduser("~" + os.sep + 'Desktop'))
+	filename = askopenfilename(initialdir=os.path.expanduser("~" + os.sep + 'Desktop' ))
 	eel.chosefile(filename)
 
 bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
@@ -75,7 +75,7 @@ def prev(name, prefill, url, path, width, eqtype, custom, maxans, numq):
 	if custom != "":
 		eqs = []
 		for line in custom.split('\n'):
-			if "|=>|" in line and not line.startwith('//'):
+			if "|=>|" in line and not line.startswith('//'):
 				eqs.append(tuple(line.split('|=>|')))
 		questions = len(eqs)
 	width, height = result.size
