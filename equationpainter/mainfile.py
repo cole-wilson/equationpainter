@@ -63,7 +63,8 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 		print(eqs)
 		questions = len(eqs)
 	img = Image.open(a)
-	img.save(os.path.expanduser("~" + os.sep + 'Desktop' + os.sep + 'EquationPainter' + os.sep + "images" + os.sep + name + ".png"),format="PNG")
+	if url != "":
+		img.save(os.path.expanduser("~" + os.sep + 'Desktop' + os.sep + 'EquationPainter' + os.sep + "images" + os.sep + name + ".png"),format="PNG")
 	change_in_size = img.width / siz
 	new_height = round(img.height / change_in_size)
 	result = img.resize((siz, new_height), resample=Image.BILINEAR)
