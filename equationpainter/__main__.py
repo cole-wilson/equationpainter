@@ -149,11 +149,11 @@ if __name__ == "__main__":
 		a = requests.get("https://api.github.com/repos/cole-wilson/equationpainter/releases").json()
 		print(a[0]['tag_name'][:4])
 		print(equationpainter.__version__[:4])
-		if a[0]['tag_name'][:4] != "v" + equationpainter.__version__[:4]:
+		if a[0]['tag_name'][:4] != "v" + equationpainter.__version__[:3]:
 			Tk().withdraw()
 			tkinter.messagebox.showinfo("Update:","Equationpainter has an update availible!\n\n({})\n\nGo to https://github.com/cole-wilson/equationpainter/releases/latest to update".format(a[0]['tag_name']))
 		main()
-	except BaseException as e:
+	except KeyboardInterrupt as e:
 		logging.critical("Couldn't run main()!", exc_info=True)
 		Tk().withdraw()
 		tkinter.messagebox.showerror("ERROR!!!!!!!!!!!!!!!!!!!!!!","EquationPainter was unable to launch.\n\nView log at: {}".format(path_to_dat + os.sep + "log.txt"))
