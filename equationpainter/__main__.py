@@ -1,5 +1,6 @@
 import eel
-
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
 import equationpainter
 import equationpainter.mainfile as mainfile
 import sys
@@ -15,7 +16,7 @@ import json
 bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
 path_to_dat = os.path.abspath(os.path.join(bundle_dir, 'web'))
 logging.basicConfig(filename=path_to_dat + os.sep + 'log.txt', level=logging.INFO,format="[%(asctime)s] {%(name)s} (%(levelname)s): %(message)s")
-
+logging.info('============================RESTART===============================\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
 @eel.expose
 def getFile():
 	Tk().withdraw()
@@ -70,7 +71,7 @@ def generate(name, prefill, url, path, width, eqtype, custom, maxans, numq,dirs,
 	except BaseException as e:
 		Tk().withdraw()
 		logging.exception("Error generating spreadsheet:")
-		tkinter.messagebox.showerror("Fatal Error:","EquationPainter had a fatal error that interrupted it's processing of your spreadsheet:\n\n\t{}\n\nThis may be cause you chose an option that was too large, or the spreadsheet name is already open. If you cannot resolve this error on your own, contact Cole at cole@colewilson.xyz.\nThank you for your patience!\n\nView log at: {}".format(e,path_to_dat+"log.txt"))
+		tkinter.messagebox.showerror("Fatal Error:","EquationPainter had a fatal error that interrupted it's processing of your spreadsheet:\n\n\t{}\n\nThis may be cause you chose an option that was too large, or the spreadsheet name is already open. If you cannot resolve this error on your own, contact Cole at cole@colewilson.xyz.\nThank you for your patience!\n\nView log at: {}".format(e,path_to_dat + os.sep + "log.txt"))
 
 
 @eel.expose
@@ -103,7 +104,7 @@ def prev(name, prefill, url, path, width, eqtype, custom, maxans, numq):
 		eel.load_preview()
 	except BaseException as e:
 		Tk().withdraw()
-		tkinter.messagebox.showwarning("Error generating image.","EquationPainter had an error that interrupted it's processing of your preview image:\n\n\t{}\n\nThis may be cause you chose an option that was too large, or the spreadsheet name is already open. If you cannot resolve this error on your own, contact Cole at cole@colewilson.xyz.\nThank you for your patience!\n\nView log at: {}".format(e,path_to_dat+"log.txt"))
+		tkinter.messagebox.showwarning("Error generating image.","EquationPainter had an error that interrupted it's processing of your preview image:\n\n\t{}\n\nThis may be cause you chose an option that was too large, or the spreadsheet name is already open. If you cannot resolve this error on your own, contact Cole at cole@colewilson.xyz.\nThank you for your patience!\n\nView log at: {}".format(e,path_to_dat + os.sep + "log.txt"))
 		logging.exception("Error previewing image:")
 
 @eel.expose
@@ -114,6 +115,30 @@ def launch():
 		os.system(runcommand)
 	elif sys.platform.startswith('dar'):
 		os.system("open -a Excel {}".format(filename))
+
+@eel.expose
+def uploadToDrive():
+	try:
+		GoogleAuth.DEFAULT_SETTINGS['client_config_file'] = bundle_dir + os.sep + "secrets.json"
+		gauth = GoogleAuth()
+		gauth.LoadCredentialsFile(bundle_dir + os.sep + "gdrivecredentials.txt")
+		if gauth.credentials is None:
+				gauth.LocalWebserverAuth()
+		elif gauth.access_token_expired:
+				gauth.Refresh()
+		else:
+				gauth.Authorize()
+		gauth.SaveCredentialsFile("gdrivecredentials.txt")
+		gauth.LocalWebserverAuth()
+		drive = GoogleDrive(gauth)
+		file_drive = drive.CreateFile({'title': os.path.basename(filename)})
+		file_drive.SetContentFile(filename)
+		file_drive.Upload()
+	except BaseException as e:
+		logging.exception('Error uplaoding to Drive. ;(')
+	Tk().withdraw()
+	tkinter.messagebox.showinfo("Uploaded!","EquationPainter has uploaded your spreadsheet to Google Drive. Go to: \n\n\thttps://drive.google.com/drive/u/0/recent\n\nto view your file.")
+	logging.info("Uploaded to Drive!")
 
 def main():
 	eel.init(path_to_dat)
@@ -131,4 +156,4 @@ if __name__ == "__main__":
 	except BaseException as e:
 		logging.critical("Couldn't run main()!", exc_info=True)
 		Tk().withdraw()
-		tkinter.messagebox.showerror("ERROR!!!!!!!!!!!!!!!!!!!!!!","EquationPainter was unable to launch.\n\nView log at: {}".format(path_to_dat+"log.txt"))
+		tkinter.messagebox.showerror("ERROR!!!!!!!!!!!!!!!!!!!!!!","EquationPainter was unable to launch.\n\nView log at: {}".format(path_to_dat + os.sep + "log.txt"))

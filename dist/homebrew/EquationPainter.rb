@@ -1,6 +1,6 @@
 # Created with sailboat, the Python releaser
 
-# v3.3.65
+# v3.3.66
 
 class EquationPainter < Formula
   include Language::Python::Virtualenv
@@ -48,6 +48,10 @@ class EquationPainter < Formula
    resource "bottle_websocket" do
       url "https://files.pythonhosted.org/packages/17/8e/a22666b4bb0a6e31de579504077df2b1c2f1438136777c728e6cfabef295/bottle-websocket-0.2.9.tar.gz"
       sha256 "9887f70dc0c7592ed8d0d11a14aa95dede6cd08d50d83d5b81fd963e5fec738b"
+   end
+   resource "pydrive" do
+      url "https://files.pythonhosted.org/packages/52/e0/0e64788e5dd58ce2d6934549676243dc69d982f198524be9b99e9c2a4fd5/PyDrive-1.3.1.tar.gz"
+      sha256 "83890dcc2278081c6e3f6a8da1f8083e25de0bcc8eb7c91374908c5549a20787"
    end
 
 
