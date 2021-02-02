@@ -100,7 +100,7 @@ def prev(name, prefill, url, path, width, eqtype, custom, maxans, numq):
 		logging.info('Saved preview')
 		eel.load_preview()
 	except BaseException as e:
-		logging.warn(e)
+		logging.exception()
 
 @eel.expose
 def launch():
@@ -118,5 +118,9 @@ def main():
 if __name__ == "__main__":
 	try:
 		main()
+		# a = requests.get("https://api.github.com/repos/cole-wilson/equationpainter/releases").json()
+		# if a[0]['tag_name'][:4] != __version__[:4]:
+		# 	Tk().withdraw()
+		# 	tkinter.messagebox.showinfo("Update:","EquationPainter had a fatal error that interrupted it's processing of your spreadsheet:\n\n\t{}\n\nThis may be cause you chose an option that was too large, or the spreadsheet name is already open. If you cannot resolve this error on your own, contact Cole at cole@colewilson.xyz.\nThank you for your patience!".format(e))
 	except:
 		logging.critical("Couldn't run main()")
