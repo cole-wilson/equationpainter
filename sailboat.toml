@@ -13,15 +13,9 @@ description = "A way for teachers to make equation painter worksheets for their 
 url = "https://github.com/cole-wilson/wsm"
 keywords = ""
 license = "MIT"
-<<<<<<< HEAD
-latest_build = "3.3.64"
+latest_build = "3.3.65"
 release-notes = "fix"
 latest_release = "3.3.64"
-=======
-latest_build = "3.3.65"
-release-notes = "added logging"
-latest_release = "3.3.65"
->>>>>>> dcef2079e83637e2ae5d1350a934041acdf1ddb1
 
 
 # Resource Setup:

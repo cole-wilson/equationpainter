@@ -24,7 +24,7 @@ def getFile():
 		eel.chosefile(filename)
 		logging.info("Got image file: {}".format(filename))
 	except BaseException as e:
-		logging.exception()
+		logging.exception("Error getting file image file:")
 
 
 # input(path_to_dat)
@@ -70,7 +70,7 @@ def generate(name, prefill, url, path, width, eqtype, custom, maxans, numq,dirs,
 	except BaseException as e:
 		Tk().withdraw()
 		logging.exception("Error generating spreadsheet:")
-		tkinter.messagebox.showerror("Fatal Error:","EquationPainter had a fatal error that interrupted it's processing of your spreadsheet:\n\n\t{}\n\nThis may be cause you chose an option that was too large, or the spreadsheet name is already open. If you cannot resolve this error on your own, contact Cole at cole@colewilson.xyz.\nThank you for your patience!".format(e))
+		tkinter.messagebox.showerror("Fatal Error:","EquationPainter had a fatal error that interrupted it's processing of your spreadsheet:\n\n\t{}\n\nThis may be cause you chose an option that was too large, or the spreadsheet name is already open. If you cannot resolve this error on your own, contact Cole at cole@colewilson.xyz.\nThank you for your patience!\n\nView log at: {}".format(e,path_to_dat+"log.txt"))
 
 
 @eel.expose
@@ -103,7 +103,7 @@ def prev(name, prefill, url, path, width, eqtype, custom, maxans, numq):
 		eel.load_preview()
 	except BaseException as e:
 		Tk().withdraw()
-		tkinter.messagebox.showwarning("Error generating image.","EquationPainter had an error that interrupted it's processing of your preview image:\n\n\t{}\n\nThis may be cause you chose an option that was too large, or the spreadsheet name is already open. If you cannot resolve this error on your own, contact Cole at cole@colewilson.xyz.\nThank you for your patience!".format(e))
+		tkinter.messagebox.showwarning("Error generating image.","EquationPainter had an error that interrupted it's processing of your preview image:\n\n\t{}\n\nThis may be cause you chose an option that was too large, or the spreadsheet name is already open. If you cannot resolve this error on your own, contact Cole at cole@colewilson.xyz.\nThank you for your patience!\n\nView log at: {}".format(e,path_to_dat+"log.txt"))
 		logging.exception("Error previewing image:")
 
 @eel.expose
@@ -130,3 +130,5 @@ if __name__ == "__main__":
 		main()
 	except BaseException as e:
 		logging.critical("Couldn't run main()!", exc_info=True)
+		Tk().withdraw()
+		tkinter.messagebox.showerror("ERROR!!!!!!!!!!!!!!!!!!!!!!","EquationPainter was unable to launch.\n\nView log at: {}".format(path_to_dat+"log.txt"))

@@ -7,8 +7,8 @@ class EquationPainter < Formula
 
   desc "A way for teachers to make equation painter worksheets for their students."
   homepage "https://github.com/cole-wilson/wsm"
-  url "https://files.pythonhosted.org/packages/69/d6/77c551d635977abfec0eecea1e58d9ff86c02bf7242104521bc1de05bf27/equationpainter-3.3.64.tar.gz" # These lines must be configured during release, not build.
-  sha256 "ead8a613aa390aad03a8fa5e65e632e3d04143af66c8794024daa9d748069e9d" # ^^^
+  url "{pyhosted}" # These lines must be configured during release, not build.
+  sha256 "{sha256}" # ^^^
   license "MIT"
 
   livecheck do
