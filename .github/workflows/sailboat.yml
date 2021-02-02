@@ -1,5 +1,5 @@
-# Workflow version v0.1.2, workflow subs: [name: `Equation_Painter`, short_name: `equation_painter_wsm`]
-name: Publish release files for Equation_Painter.
+# Workflow version v0.1.2, workflow subs: [name: `EquationPainter`, short_name: `equationpainter`]
+name: Publish release files for EquationPainter.
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
         include:
           - os: ubuntu-latest
             artifact_path: ./dist/*/*
-            builds:  pyinstaller pypi
+            builds:  pyinstaller homebrew setcodeversion pypi
             asset_name: default
             glob: true
 
@@ -39,11 +39,7 @@ jobs:
         python-version: '3.x'
     - name: Install Dependencies and Build
       run: |
-        pip install eel
-        pip install pyinstaller
-        pip install pillow
-        pip install sailboat
-        pip install xlsxwriter
+        pip install sailboat requests pillow xlsxwriter eel gevent bottle bottle_websocket pydrive
         python -m sailboat.__main__ build + ${{ matrix.builds }}
         
     - name: Check for prerelease

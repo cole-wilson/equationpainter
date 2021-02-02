@@ -128,7 +128,7 @@ def uploadToDrive():
 				gauth.Refresh()
 		else:
 				gauth.Authorize()
-		gauth.SaveCredentialsFile("gdrivecredentials.txt")
+		gauth.SaveCredentialsFile(bundle_dir + os.sep + "gdrivecredentials.txt")
 		gauth.LocalWebserverAuth()
 		drive = GoogleDrive(gauth)
 		file_drive = drive.CreateFile({'title': os.path.basename(filename)})
