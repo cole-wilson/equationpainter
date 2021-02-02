@@ -1,4 +1,6 @@
 import eel
+
+import equationpainter
 import equationpainter.mainfile as mainfile
 import sys
 import logging
@@ -12,7 +14,7 @@ import json
 
 bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
 path_to_dat = os.path.abspath(os.path.join(bundle_dir, 'web'))
-logging.basicConfig(filename=path_to_dat + os.sep + 'log.txt', level=logging.INFO,format="[%(asctime)s] {%(name)s} %(levelname)s: %(message)s")
+logging.basicConfig(filename=path_to_dat + os.sep + 'log.txt', level=logging.INFO,format="[%(asctime)s] {%(name)s} (%(levelname)s): %(message)s")
 
 @eel.expose
 def getFile():
@@ -22,7 +24,7 @@ def getFile():
 		eel.chosefile(filename)
 		logging.info("Got image file: {}".format(filename))
 	except BaseException as e:
-		logging.warn("Couldn't get image file: {}".format(e))
+		logging.exception()
 
 
 # input(path_to_dat)
@@ -67,7 +69,7 @@ def generate(name, prefill, url, path, width, eqtype, custom, maxans, numq,dirs,
 		eel.done()
 	except BaseException as e:
 		Tk().withdraw()
-		logging.error(e)
+		logging.exception("Error generating spreadsheet:")
 		tkinter.messagebox.showerror("Fatal Error:","EquationPainter had a fatal error that interrupted it's processing of your spreadsheet:\n\n\t{}\n\nThis may be cause you chose an option that was too large, or the spreadsheet name is already open. If you cannot resolve this error on your own, contact Cole at cole@colewilson.xyz.\nThank you for your patience!".format(e))
 
 
@@ -100,7 +102,9 @@ def prev(name, prefill, url, path, width, eqtype, custom, maxans, numq):
 		logging.info('Saved preview')
 		eel.load_preview()
 	except BaseException as e:
-		logging.exception()
+		Tk().withdraw()
+		tkinter.messagebox.showwarning("Error generating image.","EquationPainter had an error that interrupted it's processing of your preview image:\n\n\t{}\n\nThis may be cause you chose an option that was too large, or the spreadsheet name is already open. If you cannot resolve this error on your own, contact Cole at cole@colewilson.xyz.\nThank you for your patience!".format(e))
+		logging.exception("Error previewing image:")
 
 @eel.expose
 def launch():
@@ -113,14 +117,16 @@ def launch():
 
 def main():
 	eel.init(path_to_dat)
-	eel.start('main.html', size=(400, 500),port=7890)
+	eel.start('main.html', size=(400, 500), port=7890)
 
 if __name__ == "__main__":
 	try:
+		a = requests.get("https://api.github.com/repos/cole-wilson/equationpainter/releases").json()
+		print(a[0]['tag_name'][:4])
+		print(equationpainter.__version__[:4])
+		if a[0]['tag_name'][:4] != equationpainter.__version__[:4]:
+			Tk().withdraw()
+			tkinter.messagebox.showinfo("Update:","Equationpainter has an update availible!\n\n({})\n\nGo to https://github.com/cole-wilson/equationpainter/releases/latest to update".format(a[0]['tag_name']))
 		main()
-		# a = requests.get("https://api.github.com/repos/cole-wilson/equationpainter/releases").json()
-		# if a[0]['tag_name'][:4] != __version__[:4]:
-		# 	Tk().withdraw()
-		# 	tkinter.messagebox.showinfo("Update:","EquationPainter had a fatal error that interrupted it's processing of your spreadsheet:\n\n\t{}\n\nThis may be cause you chose an option that was too large, or the spreadsheet name is already open. If you cannot resolve this error on your own, contact Cole at cole@colewilson.xyz.\nThank you for your patience!".format(e))
-	except:
-		logging.critical("Couldn't run main()")
+	except BaseException as e:
+		logging.critical("Couldn't run main()!", exc_info=True)
