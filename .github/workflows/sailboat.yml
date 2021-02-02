@@ -39,7 +39,7 @@ jobs:
         python-version: '3.x'
     - name: Install Dependencies and Build
       run: |
-        pip install sailboat requests pillow xlsxwriter eel gevent bottle bottle_websocket pydrive
+        pip install eel pyinstaller pillow sailboat xlsxwriter pydrive google-api-python-client==1.8.0
         python -m sailboat.__main__ build + ${{ matrix.builds }}
         
     - name: Check for prerelease

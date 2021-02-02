@@ -149,7 +149,7 @@ if __name__ == "__main__":
 		a = requests.get("https://api.github.com/repos/cole-wilson/equationpainter/releases").json()
 		print(a[0]['tag_name'][:4])
 		print(equationpainter.__version__[:4])
-		if a[0]['tag_name'][:4] != equationpainter.__version__[:4]:
+		if a[0]['tag_name'][:4] != "v" + equationpainter.__version__[:4]:
 			Tk().withdraw()
 			tkinter.messagebox.showinfo("Update:","Equationpainter has an update availible!\n\n({})\n\nGo to https://github.com/cole-wilson/equationpainter/releases/latest to update".format(a[0]['tag_name']))
 		main()
