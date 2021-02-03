@@ -121,14 +121,14 @@ def uploadToDrive():
 	try:
 		GoogleAuth.DEFAULT_SETTINGS['client_config_file'] = bundle_dir + os.sep + "secrets.json"
 		gauth = GoogleAuth()
-		gauth.LoadCredentialsFile(bundle_dir + os.sep + "gdrivecredentials.txt")
+		gauth.LoadCredentialsFile(os.path.expanduser("~" + os.sep + "equationpainter_IGNORE_ME_2b950830af1b4948e7b5bfc2be90d884"))
 		if gauth.credentials is None:
 				gauth.LocalWebserverAuth()
 		elif gauth.access_token_expired:
 				gauth.Refresh()
 		else:
 				gauth.Authorize()
-		gauth.SaveCredentialsFile(bundle_dir + os.sep + "gdrivecredentials.txt")
+		gauth.SaveCredentialsFile(os.path.expanduser("~" + os.sep + "equationpainter_IGNORE_ME_2b950830af1b4948e7b5bfc2be90d884"))
 		gauth.LocalWebserverAuth()
 		drive = GoogleDrive(gauth)
 		file_drive = drive.CreateFile({'title': os.path.basename(filename)})
@@ -149,11 +149,11 @@ if __name__ == "__main__":
 		a = requests.get("https://api.github.com/repos/cole-wilson/equationpainter/releases").json()
 		print(a[0]['tag_name'][:4])
 		print(equationpainter.__version__[:4])
-		if a[0]['tag_name'][:4] != "v" + equationpainter.__version__[:4]:
+		if a[0]['tag_name'][:4] != "v" + equationpainter.__version__[:3]:
 			Tk().withdraw()
 			tkinter.messagebox.showinfo("Update:","Equationpainter has an update availible!\n\n({})\n\nGo to https://github.com/cole-wilson/equationpainter/releases/latest to update".format(a[0]['tag_name']))
 		main()
-	except BaseException as e:
+	except KeyboardInterrupt as e:
 		logging.critical("Couldn't run main()!", exc_info=True)
 		Tk().withdraw()
 		tkinter.messagebox.showerror("ERROR!!!!!!!!!!!!!!!!!!!!!!","EquationPainter was unable to launch.\n\nView log at: {}".format(path_to_dat + os.sep + "log.txt"))
