@@ -26,7 +26,9 @@ def getFile():
 		logging.info("Got image file: {}".format(filename))
 	except BaseException as e:
 		logging.exception("Error getting file image file:")
-
+@eel.expose
+def getloglink():
+	eel.setloglink("file://" + path_to_dat + os.sep + "log.txt")
 
 # input(path_to_dat)
 # input(getattr(sys, '_MEIPASS'))
