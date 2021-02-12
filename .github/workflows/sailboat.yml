@@ -15,7 +15,7 @@ jobs:
         include:
           - os: ubuntu-latest
             artifact_path: ./dist/*/*
-            builds:  pyinstaller homebrew setcodeversion pypi
+            builds:  pyinstaller homebrew setcodeversion workflow pypi
             asset_name: default
             glob: true
 
@@ -39,7 +39,7 @@ jobs:
         python-version: '3.x'
     - name: Install Dependencies and Build
       run: |
-        pip install eel pyinstaller pillow sailboat xlsxwriter pydrive google-api-python-client==1.8.0
+        pip install sailboat requests pillow xlsxwriter Image eel gevent bottle bottle_websocket pydrive
         python -m sailboat.__main__ build + ${{ matrix.builds }}
         
     - name: Check for prerelease
