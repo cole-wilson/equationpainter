@@ -92,7 +92,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	count = 0
 	if maxans < questions:
 		maxans = questions + 1
-	if custom != "":
+	if custom == "":
 		randomints = random.sample(list(range(0,maxans)),questions)
 	else:
 		randomints = [i[1] for i in eqs]
