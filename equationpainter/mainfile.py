@@ -34,7 +34,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 		pass
 	
 	name = '{}.xlsx'.format(name)
-	# print("Your spreadsheet will be named",name+",","and saved on your Desktop in a folder called EquationPainter.")
+	# # print("Your spreadsheet will be named",name+",","and saved on your Desktop in a folder called EquationPainter.")
 	workbook = xlsxwriter.Workbook(
 		os.path.expanduser("~" + os.sep + 'Desktop' + os.sep) + 'EquationPainter' + os.sep + name)
 	worksheet = workbook.add_worksheet()
@@ -64,11 +64,12 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 		for line in custom.split('\n'):
 			if "|=>|" in line and not line.startswith('//'):
 				eqs.append(tuple(line.split('|=>|')))
-		print(eqs)
+		# print(eqs)
 		questions = len(eqs)
 		logging.info("# of questions: {}".format(questions))
 	elif custom != "":
 		eqs = custom
+		questions = len(eqs)
 	img = Image.open(a)
 	if url != "":
 		img.save(os.path.expanduser("~" + os.sep + 'Desktop' + os.sep + 'EquationPainter' + os.sep + "images" + os.sep + name.replace('.xlsx','') + ".png"),format="PNG")
@@ -94,12 +95,12 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	randomints = random.sample(list(range(0,maxans)),questions)
 	logging.info("Made Random answers: {}".format(randomints))
 
-	print(questions)
-	print(colors)
+	# print(questions)
+	# print(colors)
 	logging.info("Unique colors: {}".format(colors))
 	for icount,color in enumerate(colors):  # todo: make it so that there are no white colors.
 		if filename != "":
-			print(eqs[count])
+			# print(eqs[count])
 			num = int(eqs[count-1][1])
 			count += 1
 		else:
@@ -151,7 +152,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 		else:
 			equation = eqs[index][0]
 		worksheet.merge_range(index3, 0, index3 + mergeheight - 1, 0, equation, merge_format1)
-		# print(index3,0,index3+2,0)
+		# # print(index3,0,index3+2,0)
 		if prefill:
 			prefill_number = answer
 		else:
