@@ -92,7 +92,10 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	count = 0
 	if maxans < questions:
 		maxans = questions + 1
-	randomints = random.sample(list(range(0,maxans)),questions)
+	if custom != "":
+		randomints = random.sample(list(range(0,maxans)),questions)
+	else:
+		randomints = [i[1] for i in eqs]
 	logging.info("Made Random answers: {}".format(randomints))
 
 	# print(questions)
