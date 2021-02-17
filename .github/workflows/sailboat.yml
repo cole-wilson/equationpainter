@@ -15,7 +15,7 @@ jobs:
         include:
           - os: ubuntu-latest
             artifact_path: ./dist/*/*
-            builds:  pyinstaller homebrew setcodeversion pypi
+            builds:  pyinstaller homebrew setcodeversion workflow pypi
             asset_name: default
             glob: true
 

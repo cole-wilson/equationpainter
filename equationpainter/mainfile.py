@@ -59,7 +59,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	else:
 		a = os.path.expanduser(path)
 		logging.info("Using path: {}".format(a))
-	if custom != "":
+	if custom != "" and type(custom) == str:
 		eqs = []
 		for line in custom.split('\n'):
 			if "|=>|" in line and not line.startswith('//'):
@@ -67,6 +67,8 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 		print(eqs)
 		questions = len(eqs)
 		logging.info("# of questions: {}".format(questions))
+	elif custom != "":
+		eqs = custom
 	img = Image.open(a)
 	if url != "":
 		img.save(os.path.expanduser("~" + os.sep + 'Desktop' + os.sep + 'EquationPainter' + os.sep + "images" + os.sep + name.replace('.xlsx','') + ".png"),format="PNG")
@@ -98,7 +100,7 @@ def main(name="", prefill=True, url="", path="", width=70, eqtype="+", custom=""
 	for icount,color in enumerate(colors):  # todo: make it so that there are no white colors.
 		if filename != "":
 			print(eqs[count])
-			num = int(eqs[count-1][1].replace(' ', ''))
+			num = int(eqs[count-1][1])
 			count += 1
 		else:
 			num = randomints[icount]
