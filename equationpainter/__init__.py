@@ -1,4 +1,4 @@
-__version__ = "3.4.4"  # Added by Sailboat
+__version__ = "3.4.5"  # Added by Sailboat
 
 
 
