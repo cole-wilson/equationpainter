@@ -1,5 +1,5 @@
 # Workflow version v0.1.2, workflow subs: [name: `EquationPainter`, short_name: `equationpainter`]
-name: Publish release files for EquationPainter.
+name: <img>
 
 on:
   push:
